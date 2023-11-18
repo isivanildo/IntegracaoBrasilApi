@@ -20,6 +20,6 @@ namespace Models
         public string? Rua { get; set; }
 
         [JsonPropertyName("service")]
-        public string? Service { get; set; }
+        public string? Servico { get; set; }
     }
 }
