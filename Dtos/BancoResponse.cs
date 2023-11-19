@@ -1,6 +1,6 @@
 namespace Dtos
 {
-    public class ResponseBanco
+    public class BancoResponse
     {
         public string? Ispb { get; set; }
         public string? NomeAbreviado { get; set; }

@@ -14,7 +14,7 @@ namespace Models
         public string? Cidade { get; set; }
 
         [JsonPropertyName("neighborhood")]
-        public string? Regiao { get; set; }
+        public string? Bairro { get; set; }
 
         [JsonPropertyName("street")]
         public string? Rua { get; set; }
