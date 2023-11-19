@@ -8,9 +8,30 @@ namespace Rest
 {
     public class BrasilApiRest : IBrasilApi
     {
-        public Task<ResponseGenerico<Banco>> BuscarBanco(string codigoBanco)
+        public async Task<ResponseGenerico<Banco>> BuscarBanco(string codigoBanco)
         {
-            throw new NotImplementedException();
+            var request = new HttpRequestMessage(HttpMethod.Get, $"https://brasilapi.com.br/api/banks/v1/{codigoBanco}");
+            var response = new ResponseGenerico<Banco>();
+
+            using (var client = new HttpClient()) 
+            {
+                var responseBrasilApi = await client.SendAsync(request);
+                var contentResponse = await responseBrasilApi.Content.ReadAsStringAsync();
+                var objResponse = JsonSerializer.Deserialize<Banco>(contentResponse);
+
+                if (responseBrasilApi.IsSuccessStatusCode) 
+                {
+                    response.CodigoHttp = responseBrasilApi.StatusCode;
+                    response.DadosRetornados = objResponse;
+                }
+                else 
+                {
+                    response.CodigoHttp = responseBrasilApi.StatusCode;
+                    response.ErroRetornado = JsonSerializer.Deserialize<ExpandoObject>(contentResponse);
+                }
+            }
+
+            return response;
         }
 
         public async Task<ResponseGenerico<Endereco>> BuscarEnderecoPorCep(string cep)
@@ -39,9 +60,30 @@ namespace Rest
             return response;
         }
 
-        public Task<ResponseGenerico<List<Banco>>> BuscaTodosBancos()
+        public async Task<ResponseGenerico<List<Banco>>> BuscaTodosBancos()
         {
-            throw new NotImplementedException();
+            var request = new HttpRequestMessage(HttpMethod.Get, $"https://brasilapi.com.br/api/banks/v1");
+            var response = new ResponseGenerico<List<Banco>>();
+
+            using (var client = new HttpClient()) 
+            {
+                var responseBrasilApi = await client.SendAsync(request);
+                var contentResponse = await responseBrasilApi.Content.ReadAsStringAsync();
+                var objResponse = JsonSerializer.Deserialize<List<Banco>>(contentResponse);
+
+                if (responseBrasilApi.IsSuccessStatusCode) 
+                {
+                    response.CodigoHttp = responseBrasilApi.StatusCode;
+                    response.DadosRetornados = objResponse;
+                }
+                else 
+                {
+                    response.CodigoHttp = responseBrasilApi.StatusCode;
+                    response.ErroRetornado = JsonSerializer.Deserialize<ExpandoObject>(contentResponse);
+                }
+            }
+
+            return response;
         }
 
     }

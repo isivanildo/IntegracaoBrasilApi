@@ -22,15 +22,15 @@ namespace Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> BuscaEndereco([FromRoute] string cep) 
         {
-            var response = await _endereco.BuscarEndereco(cep);
+            var endereco = await _endereco.BuscarEndereco(cep);
 
-            if (response.CodigoHttp == HttpStatusCode.OK) 
+            if (endereco.CodigoHttp == HttpStatusCode.OK) 
             {
-                return Ok(response.DadosRetornados);
+                return Ok(endereco.DadosRetornados);
             }
             else
             {
-                return StatusCode((int)response.CodigoHttp, response.ErroRetornado);
+                return StatusCode((int)endereco.CodigoHttp, endereco.ErroRetornado);
             }
         }
     }

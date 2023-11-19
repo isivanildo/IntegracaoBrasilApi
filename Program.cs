@@ -13,9 +13,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IEndereco, EnderecoService>();
+builder.Services.AddSingleton<IBanco, BancoService>();
 builder.Services.AddSingleton<IBrasilApi, BrasilApiRest>();
 
 builder.Services.AddAutoMapper(typeof(EnderecoMapping));
+builder.Services.AddAutoMapper(typeof(BancoMapping));
 
 var app = builder.Build();
 
