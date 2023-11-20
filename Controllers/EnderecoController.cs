@@ -33,5 +33,25 @@ namespace Controllers
                 return StatusCode((int)endereco.CodigoHttp, endereco.ErroRetornado);
             }
         }
+
+        [HttpGet("buscacomlocalizacao/{cep}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> BuscaEnderecoMultiplo([FromRoute] string cep)
+        {
+            var endereco = await _endereco.BuscarEnderecoPorCepV2(cep);
+
+            if (endereco.CodigoHttp == HttpStatusCode.OK)
+            {
+                return Ok(endereco.DadosRetornados);
+            }
+            else
+            {
+                return StatusCode((int)endereco.CodigoHttp, endereco.ErroRetornado);
+            }
+
+        }
     }
 }

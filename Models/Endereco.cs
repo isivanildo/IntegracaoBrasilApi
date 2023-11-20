@@ -8,7 +8,7 @@ namespace Models
         public string? Cep { get; set; }
 
         [JsonPropertyName("state")]
-        public string? Estado { get; set; }
+        public string? Uf { get; set; }
 
         [JsonPropertyName("city")]
         public string? Cidade { get; set; }

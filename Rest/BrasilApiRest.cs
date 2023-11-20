@@ -60,6 +60,32 @@ namespace Rest
             return response;
         }
 
+        public async Task<ResponseGenerico<EnderecoMultiplo>> BuscarEnderecoPorCepV2(string cep)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, $"https://brasilapi.com.br/api/cep/v2/{cep}");
+            var response = new ResponseGenerico<EnderecoMultiplo>();
+
+            using (var client = new HttpClient())
+            {
+                var responseBrasilApi = await client.SendAsync(request);
+                var contentResponse = await responseBrasilApi.Content.ReadAsStringAsync();
+                var objResponse = JsonSerializer.Deserialize<EnderecoMultiplo>(contentResponse);
+
+                if (responseBrasilApi.IsSuccessStatusCode)
+                {
+                    response.CodigoHttp = responseBrasilApi.StatusCode;
+                    response.DadosRetornados = objResponse;
+                }
+                else
+                {
+                    response.CodigoHttp = responseBrasilApi.StatusCode;
+                    response.ErroRetornado = JsonSerializer.Deserialize<ExpandoObject>(contentResponse);
+                }
+            }
+
+            return response;
+        }
+
         public async Task<ResponseGenerico<List<Banco>>> BuscaTodosBancos()
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"https://brasilapi.com.br/api/banks/v1");

@@ -2,10 +2,8 @@ using Dtos;
 
 namespace Interfaces
 {
-    public interface IEndereco
+    public interface IEnderecoMultiplo
     {
-        Task<ResponseGenerico<EnderecoResponse>> BuscarEndereco(string cep);
         Task<ResponseGenerico<EnderecoMultiploResponse>> BuscarEnderecoPorCepV2(string cep);
-
     }
 }

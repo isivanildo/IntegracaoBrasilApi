@@ -11,6 +11,8 @@ namespace Mappings
             CreateMap(typeof(ResponseGenerico<>), typeof(ResponseGenerico<>));
             CreateMap<EnderecoResponse, Endereco>();
             CreateMap<Endereco, EnderecoResponse>();
+            CreateMap<EnderecoMultiploResponse, EnderecoMultiplo>();
+            CreateMap<EnderecoMultiplo, EnderecoMultiploResponse>();
         }
     }
 }

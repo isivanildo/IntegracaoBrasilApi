@@ -21,5 +21,12 @@ namespace Services
             return _mapper.Map<ResponseGenerico<EnderecoResponse>>(endereco);
         }
 
+        public async Task<ResponseGenerico<EnderecoMultiploResponse>> BuscarEnderecoPorCepV2(string cep)
+        {
+            var endereco = await _brasilApi.BuscarEnderecoPorCepV2(cep);
+
+            return _mapper.Map<ResponseGenerico<EnderecoMultiploResponse>>(endereco);
+        }
+
     }
 }
