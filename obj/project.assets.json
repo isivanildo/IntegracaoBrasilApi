@@ -770,11 +770,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\apiweb\\IntegracaoBrasilApi\\IntegracaoBrasilApi.csproj",
+      "projectUniqueName": "D:\\ApiWeb\\IntegracaoBrasilApi\\IntegracaoBrasilApi.csproj",
       "projectName": "IntegracaoBrasilApi",
-      "projectPath": "D:\\apiweb\\IntegracaoBrasilApi\\IntegracaoBrasilApi.csproj",
+      "projectPath": "D:\\ApiWeb\\IntegracaoBrasilApi\\IntegracaoBrasilApi.csproj",
       "packagesPath": "C:\\Users\\Ivanildo\\.nuget\\packages\\",
-      "outputPath": "D:\\apiweb\\IntegracaoBrasilApi\\obj\\",
+      "outputPath": "D:\\ApiWeb\\IntegracaoBrasilApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

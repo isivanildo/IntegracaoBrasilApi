@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Interfaces;
 using Mappings;
 using Rest;
@@ -7,13 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(option => 
+option.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IEndereco, EnderecoService>();
 builder.Services.AddSingleton<IBanco, BancoService>();
+builder.Services.AddSingleton<IDadosEmpresa, DadosEmpresaService>(); 
 builder.Services.AddSingleton<IBrasilApi, BrasilApiRest>();
 
 builder.Services.AddAutoMapper(typeof(EnderecoMapping));

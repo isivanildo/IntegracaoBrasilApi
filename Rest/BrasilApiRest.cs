@@ -86,5 +86,31 @@ namespace Rest
             return response;
         }
 
+        public async Task<ResponseGenerico<DadosEmpresa>> BuscaEmpresa(string cnpj)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, $"https://brasilapi.com.br/api/cnpj/v1/{cnpj}");
+            var response = new ResponseGenerico<DadosEmpresa>();
+
+            using (var client = new HttpClient())
+            {
+                var responseBrasilApi = await client.SendAsync(request);
+                var contentResponse = await responseBrasilApi.Content.ReadAsStringAsync();
+                var objResponse = JsonSerializer.Deserialize<DadosEmpresa>(contentResponse);
+
+                if (responseBrasilApi.IsSuccessStatusCode)
+                {
+                    response.CodigoHttp = responseBrasilApi.StatusCode;
+                    response.DadosRetornados = objResponse;
+                }
+                else
+                {
+                    response.CodigoHttp = responseBrasilApi.StatusCode;
+                    response.ErroRetornado = JsonSerializer.Deserialize<ExpandoObject>(contentResponse);
+                }
+            }
+
+            return response;
+        }
+
     }
 }
